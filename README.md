@@ -46,7 +46,47 @@ Twitter Sentiment Analysis is a project that uses the **Tweepy** library to fetc
 - Fetching Tweets
 - The get_tweets() function fetches tweets based on a user-defined query and number of tweets. It then classifies each tweet as positive, negative, or neutral.
 
-### Results
+
+### How Sentiment Analysis Works in This Project
+
+**TextBlob** is a high-level library built on top of the **Natural Language Toolkit (NLTK)**, providing a simple API for common natural language processing (NLP) tasks such as tokenization, part-of-speech tagging, and sentiment analysis.
+
+1. **Clean the Tweet**:  
+   The `clean_tweet()` method is first called to remove links, special characters, and unnecessary symbols using regular expressions.
+
+2. **TextBlob Processing**:  
+   When a tweet is passed to create a `TextBlob` object, the following steps occur:
+   
+   - **Tokenization**:  
+     The tweet is tokenized, i.e., split into individual words or tokens.
+   
+   - **Stopword Removal**:  
+     Commonly used words (stopwords) like "I," "am," "you," "are," etc., are removed as they are not relevant for sentiment analysis.
+   
+   - **Part of Speech (POS) Tagging**:  
+     TextBlob tags the tokens with their corresponding part of speech, such as adjectives, adverbs, etc., to focus on the most significant features for sentiment analysis.
+   
+   - **Sentiment Classification**:  
+     The processed tokens are passed through a sentiment classifier that assigns a polarity between `-1.0` and `1.0`:
+     - **Positive sentiment**: Polarity > 0
+     - **Neutral sentiment**: Polarity = 0
+     - **Negative sentiment**: Polarity < 0
+
+### TextBlob's Sentiment Classifier
+
+- TextBlob uses a **Naive Bayes Classifier** to perform sentiment classification. The classifier is trained on a dataset that have been labeled as positive or negative. From these labeled reviews, the classifier extracts important features (words or phrases) that are commonly associated with positive and negative sentiments.
+
+- The **Naive Bayes Classifier** is a probabilistic classifier based on Bayes' Theorem. It's called "naive" because it assumes that the presence of one feature (e.g., a word in the tweet) is independent of the presence of any other feature, which simplifies the computation. Despite its simplicity, it performs surprisingly well for text classification tasks such as sentiment analysis.
+
+
+## Project Results
+Based on the search query (e.g., 'Donald Trump'), the project fetches a set of tweets and calculates the sentiment of each tweet using TextBlob. It then provides an analysis of the sentiment distribution:
+
+- Positive Tweets Percentage: Shows the proportion of tweets with a positive sentiment.
+- Negative Tweets Percentage: Shows the proportion of tweets with a negative sentiment.
+- Neutral Tweets Percentage: Shows the proportion of tweets with a neutral sentiment.
+- The user can also view a sample of tweets for each sentiment category (positive and negative) to gain deeper insights into the kinds of opinions being expressed.
+
 The script outputs:
 
 - Percentage of positive tweets.
@@ -69,10 +109,3 @@ The script outputs:
   2. "Horrible outcome of the recent..."
   3. ...
 
-## Project Results
-Based on the search query (e.g., 'Donald Trump'), the project fetches a set of tweets and calculates the sentiment of each tweet using TextBlob. It then provides an analysis of the sentiment distribution:
-
-- Positive Tweets Percentage: Shows the proportion of tweets with a positive sentiment.
-- Negative Tweets Percentage: Shows the proportion of tweets with a negative sentiment.
-- Neutral Tweets Percentage: Shows the proportion of tweets with a neutral sentiment.
-- The user can also view a sample of tweets for each sentiment category (positive and negative) to gain deeper insights into the kinds of opinions being expressed.
